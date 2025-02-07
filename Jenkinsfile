@@ -23,7 +23,7 @@ pipeline {
                 echo "This is building code"
                 sh "whoami"
                 sh "sudo docker build -t django-app:latest ."
-                echo "Hurrah!!, code build successfully!!"
+                echo "Hurrah!!, code build successfully!!!"
                 
             }
             
