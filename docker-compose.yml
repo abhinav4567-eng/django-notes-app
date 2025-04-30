@@ -52,6 +52,16 @@ services:
       start_period: 60s
     networks:
       - notes-app-nw
+      
 
 networks:
   notes-app-nw:
+  
+  version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8002:5002"
+  redis:
+    image: "redis:alpine"
