@@ -2,15 +2,15 @@ FROM python:3.9-alpine
 
 WORKDIR /app/backend
 
-# COPY requirements.txt /app/backend
-# RUN apt-get update \
-#     && apt-get upgrade -y \
-#     && apt-get install -y gcc default-libmysqlclient-dev pkg-config \
-#     && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt /app/backend
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y gcc default-libmysqlclient-dev pkg-config \
+    && rm -rf /var/lib/apt/lists/*
 
-apk update \
- && apk upgrade \
- && apk add --no-cache gcc mysql-dev pkgconfig
+# apk update \
+#  && apk upgrade \
+#  && apk add --no-cache gcc mysql-dev pkgconfig
 
 
 # Install app dependencies
