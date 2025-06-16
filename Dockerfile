@@ -4,7 +4,10 @@ FROM python:3.9
 WORKDIR /app/backend
 
 # Copy requirements.txt first (for caching)
-COPY requirements.txt .
+COPY requirements.txt /app/backend
+
+RUN pip install -r requirements.txt
+
 
 # Update and install system dependencies
 RUN apt-get update && apt-get install -y \
