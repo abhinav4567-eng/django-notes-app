@@ -1,27 +1,20 @@
-FROM python:3.9-alpine
+FROM python:3.9
 
-# Set working directory
 WORKDIR /app/backend
 
-# Install dependencies
-RUN apk update && apk add --no-cache \
-    gcc \
-    musl-dev \
-    libffi-dev \
-    mysql-client \
-    mariadb-connector-c-dev \
-    build-base \
-    python3-dev \
-    py3-pip
+COPY requirements.txt /app/backend
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y gcc default-libmysqlclient-dev pkg-config \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements file
-COPY requirements.txt .
 
-# Install Python dependencies
+# Install app dependencies
+RUN pip install mysqlclient
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY . .
+COPY . /app/backend
 
-# Set the default command
-CMD ["python", "app.py"]
+EXPOSE 8000
+#RUN python manage.py migrate
+#RUN python manage.py makemigrations
